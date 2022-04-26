@@ -165,11 +165,18 @@ class PatientRecordContract extends Contract {
      * @param {String} gender gender to be queried
     */
     // Graded Function
-   /*async queryByGender(ctx, gender) {
+   async queryByGender(ctx, gender) {
     //      TASK-4: Complete the query String JSON object to query using the genderIndex (META-INF folder)
     //      Construct the JSON couch DB selector queryString that uses genderIndex
+    let queryString = {
+        "selector": {
+            "gender": gender
+        },
+        "use_index": ["META-INF/statedb/couchdb/indexes/genderIndexDoc","genderIndex"]
+    }
     //      Pass the Query string built to queryWithQueryString
- }*/
+    return await this.queryWithQueryString(ctx, JSON.stringify(queryString));
+ }
 
     /**
      * Query by Blood_Type
@@ -178,13 +185,19 @@ class PatientRecordContract extends Contract {
      * @param {String} blood_type blood_type to queried
     */
     // Graded Function
-   /*async queryByBlood_Type(ctx, blood_type) {
+   async queryByBlood_Type(ctx, blood_type) {
     //      TASK-5: Write a new index for bloodType and write a CouchDB selector query that uses it
     //      to query by bloodType
     //      Construct the JSON couch DB selector queryString that uses blood_typeIndex
+    let queryString = { 
+        "selector": {
+            "blood_type": blood_type
+        },
+        "use_index": ["META-INF/statedb/couchdb/indexes/blood_typeIndexDoc","blood_typeIndex"]
+    }
     //      Pass the Query string built to queryWithQueryString
-
-}*/
+    return await this.queryWithQueryString(ctx, JSON.stringify(queryString));
+}
 
     /**
      * Query by Blood_Type Dual Query
